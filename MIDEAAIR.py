@@ -6,7 +6,7 @@ from twilio.rest import Client
 conf = {
     "sid": "",
     "auth":,""
-    "twilio_to": "+14139928529",
+    "twilio_to": "",
     "twilio_from":""
 }
 
@@ -29,21 +29,21 @@ while True:
         #text message
         tankLevel = appliance.tankLevel
         msg = "Humidity level reached 45 percent, appliance turned on. Current tank level: " + tankLevel
-        client.messages.create(to=conf["twilio_to"], from_=conf["twilio_from"], body=msg)
+        client.messages.create(to=conf["twilio_to"], from=conf["twilio_from"], body=msg)
     elif appliance.current_humidity < 32:
         appliance.running(False)
         #text message - turned off
         tankLevel = appliance.tankLevel
         msg = "Humidity level under 32 percent, appliance turned off. Current tank level: " + tankLevel
-        client.messages.create(to=conf["twilio_to"], from_=conf["twilio_from"], body=msg)
+        client.messages.create(to=conf["twilio_to"], from=conf["twilio_from"], body=msg)
     elif appliance.current_humidity >= 45 and appliance.tank_full:
         appliance.running(False)
         #text - full tank
         msg = "Humidity level reached, tank is full: EMPTY THE BUCKET"
-        client.messages.create(to=conf["twilio_to"], from_=conf["twilio_from"], body=msg)
+        client.messages.create(to=conf["twilio_to"], from=conf["twilio_from"], body=msg)
     elif appliance.tank_full:
         appliance.running(False)
         msg = "Humidity level good for now, tank is full: EMPTY THE BUCKET"
-        client.messages.create(to=conf["twilio_to"], from_=conf["twilio_from"], body=msg)
+        client.messages.create(to=conf["twilio_to"], from=conf["twilio_from"], body=msg)
 
     #print(f"{appliance!r}")
